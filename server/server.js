@@ -8,6 +8,13 @@ const clientRooms = {}
 io.on('connection', client => {
     client.emit('init', JSON.stringify(state))
 
+    client.on('togglePause', handleTogglePause)
+
+    function handleTogglePause(){
+        const roomName = clientRooms[client.id]
+        state[roomName].players[client.number - 1].isPaused = !state[roomName].players[client.number - 1].isPaused
+    }
+
     client.on('newGame', handleNewGame)
 
     function handleNewGame(){
@@ -57,7 +64,7 @@ io.on('connection', client => {
 
     function handleKeyDown(e){
         const roomName = clientRooms[client.id]
-        if(!roomName){
+        if(!roomName || state[roomName].players[client.number - 1].isPaused){
             return
         }
         switch(e){
@@ -85,7 +92,10 @@ io.on('connection', client => {
                 state[roomName].players[client.number - 1].isCrouch = true
                 break
             case 'p':
-                client.emit('pauseGame')
+                client.emit('pauseGame', state[roomName].players[client.number - 1])
+                break
+            case 'Escape':
+                client.emit('pauseGame', state[roomName].players[client.number - 1])
                 break
         }
     }
@@ -95,7 +105,7 @@ io.on('connection', client => {
     function handleKeyUp(e){
         const roomName = clientRooms[client.id]
 
-        if(!roomName){
+        if(!roomName || state[roomName].players[client.number - 1].isPaused){
             return
         }
 

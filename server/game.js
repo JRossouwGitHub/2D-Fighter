@@ -33,7 +33,8 @@ function createGameState() {
                     lastKey: null
                 },
                 jumps: 2,
-                jumpForce: 50
+                jumpForce: 50,
+                isPaused: false
             },
             {
                 position: {
@@ -56,7 +57,8 @@ function createGameState() {
                     lastKey: null
                 },
                 jumps: 2,
-                jumpForce: 50
+                jumpForce: 50,
+                isPaused: false
             }
         ]
     }

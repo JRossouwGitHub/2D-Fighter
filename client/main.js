@@ -18,14 +18,14 @@ socket.on('pauseGame', handlePauseGame)
 window.addEventListener('keydown', handleKeyDown)
 
 function handleKeyDown(e){
-    e.preventDefault()
+    //e.preventDefault()
     socket.emit('keydown', e.key)
 }
 
 window.addEventListener('keyup', handleKeyUp)
 
 function handleKeyUp(e){
-    e.preventDefault()
+    //e.preventDefault()
     socket.emit('keyup', e.key)
 }
 
@@ -61,14 +61,15 @@ continueBtn.addEventListener('click', pauseMenu)
 function pauseMenu (){
     if(scenes.pauseMenuScene.src.style.display == 'none'){
         scenes.pauseMenuScene.src.style.display = 'block'
+        socket.emit('togglePause')
     } else if (scenes.pauseMenuScene.src.style.display == 'block'){
         scenes.pauseMenuScene.src.style.display = 'none'
+        socket.emit('togglePause')
     }
 }
 
 function handlePauseGame(){
-    console.log('Pause?')
-    //pauseMenu()
+    pauseMenu()
 }
 
 
