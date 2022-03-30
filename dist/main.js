@@ -1,10 +1,10 @@
 const socket = io('https://fighter2d-server.herokuapp.com', {
     transports: ['websocket', 'polling', 'flashsocket'],
-    cors: {
-        origin: "https://2d-fighter.netlify.app",
-        allowedHeaders: ['Access-Control-Allow-Origin'],
-        credentials: true
-    }
+    // cors: {
+    //     origin: "https://2d-fighter.netlify.app",
+    //     allowedHeaders: ['Access-Control-Allow-Origin'],
+    //     credentials: true
+    // }
 })
 
 socket.on('init', handleInit)
