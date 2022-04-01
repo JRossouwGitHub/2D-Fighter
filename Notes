@@ -1,0 +1,7 @@
+Set individual canvas sizes
+Do this by setting the game size at each point
+i.e newGame and joinGame
+newGame(canvas)
+joinGame(code, canvas)
+on server side
+Emit this from client side function
